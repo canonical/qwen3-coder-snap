@@ -1,4 +1,4 @@
-name: Validate engine manifests
+name: Static check
 on: [pull_request]
 
 jobs:
@@ -24,7 +24,7 @@ jobs:
         with:
           go-version: '1.26.x'
 
-      - name: Run validation
+      - name: Validate engines
         run: |
           cd inference-snaps-cli/cmd/cli
           go run . debug validate-engines ../../../engines/**/*.yaml
