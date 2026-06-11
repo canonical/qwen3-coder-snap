@@ -20,7 +20,7 @@ devices:
     #   vendor-id: 0x1002
     #   microarchitecture: gfx1152
 
-runtime: llama-cpp-rocm
+runtime: llamacpp-rocm
 
 model:
   default: qwen3-coder-30b-a3b-q4-k-m-gguf
