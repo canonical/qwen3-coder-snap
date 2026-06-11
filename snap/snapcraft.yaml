@@ -1,7 +1,34 @@
 name: qwen3-coder
 base: core24
+title: Qwen3 Coder
 summary: Inference Snap for Qwen3 Coder
-description: See snapcraft.io/qwen3-coder
+description: |
+  This is an inference snap that lets you run Qwen3 Coder, an
+  instruction-tuned language model from Alibaba specialized in coding, 
+  flexibly switching from deep reasoning to fast response.
+  
+  Before you start, make sure to have the necessary drivers installed on the host:
+  https://documentation.ubuntu.com/inference-snaps/how-to/install-drivers/
+  
+  **Install:**
+  
+  `sudo snap install qwen3-coder`
+  
+  **Get help:**
+  
+  `qwen3-coder --help`
+  
+  **Licensing: **
+  
+  The Qwen3 Coder model is provided by Alibaba under the Apache 2.0 license:
+  https://github.com/QwenLM/Qwen/blob/main/LICENSE
+  
+  The licenses of all bundled software can be found inside the snap at
+  `/snap/gemma4/current/usr/share/doc`.
+
+website: https://documentation.ubuntu.com/inference-snaps
+source-code: https://github.com/canonical/qwen3-coder
+issues: https://github.com/canonical/inference-snaps/issues
 
 adopt-info: version
 
