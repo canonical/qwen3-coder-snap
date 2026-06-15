@@ -29,8 +29,8 @@ jobs:
       snap-name: qwen3-coder
       smoke-test-runner: |
         [
-          ["amd64", "large", "noble"],
-          ["arm64", "large", "noble"]
+          ["amd64", "large"],
+          ["arm64", "large"]
         ]
       smoke-test-engine: cpu
     secrets:
