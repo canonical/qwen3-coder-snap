@@ -257,7 +257,7 @@ components:
 
 apps:
   qwen3-coder:
-    command: bin/qwen3-coder
+    command: bin/modelctl
     completer: bin/snap-completer.bash
     plugs:
       - hardware-observe
