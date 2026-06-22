@@ -1,14 +1,20 @@
 id: qwen3-coder-30b-a3b-q4-k-m-gguf
 name: 30b-a3b
 
-description: Qwen3 Coder 30B A3B Q4_K_M
-model-card-url: https://huggingface.co/unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF
+description: |
+  Qwen3 Coder is a code-focused mixture-of-experts model with 30B total
+  parameters and 3B active parameters per token, optimised for code generation,
+  completion, and reasoning tasks. This variant uses Q4_K_M quantization for a
+  balance of performance and efficiency.
+model-card-url: https://huggingface.co/inference-snaps/Qwen3-Coder-30B-A3B-Instruct-GGUF-Q4_K_M-5GB
 quantization: Q4_K_M
 
 disk-size: 18G
 
 capabilities:
   - text
+  - thinking
+  - tools
 
 components:
   - model-qwen3-coder-30b-a3b-q4-k-m-1-of-4
