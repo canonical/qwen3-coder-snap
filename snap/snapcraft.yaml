@@ -99,13 +99,10 @@ parts:
 
   cli:
     source:
-      - on amd64: https://github.com/canonical/inference-snaps-cli/releases/download/v2.0.0-beta.1/inference-snaps-cli-linux-amd64.tar.xz
-      - on arm64: https://github.com/canonical/inference-snaps-cli/releases/download/v2.0.0-beta.1/inference-snaps-cli-linux-arm64.tar.xz
+      - on amd64: https://github.com/canonical/inference-snaps-cli/releases/download/v2.0.0-beta.4/inference-snaps-cli-linux-amd64.tar.xz
+      - on arm64: https://github.com/canonical/inference-snaps-cli/releases/download/v2.0.0-beta.4/inference-snaps-cli-linux-arm64.tar.xz
     plugin: dump
     override-build: |
-      mkdir -p bin
-      mv cli bin/modelctl
-
       # For tab completion
       ln --symbolic ./modelctl bin/qwen3-coder
 
@@ -163,7 +160,6 @@ parts:
       "server.sh": bin/
       "server-webui.sh": bin/
       "export-shared-configs.sh": bin/
-      "completion.bash": bin/
 
   local-component-files:
     plugin: cmake # We use an out-of-source plugin like cmake instead of "dump" to prevent unwanted copies, see https://github.com/canonical/craft-parts/issues/1609
@@ -262,7 +258,7 @@ components:
 apps:
   qwen3-coder:
     command: bin/qwen3-coder
-    completer: bin/completion.bash
+    completer: bin/snap-completer.bash
     plugs:
       - hardware-observe
       - opengl
