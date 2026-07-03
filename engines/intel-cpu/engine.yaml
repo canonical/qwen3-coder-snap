@@ -1,0 +1,20 @@
+name: intel-cpu
+summary: Optimized for Intel CPUs
+description: |
+  This engine uses OpenVINO Model Server.
+  
+  It is optimized for a range of Intel CPUs.
+vendor: Canonical Ltd
+
+devices:
+  allof:
+    - type: cpu
+      architecture: amd64
+      manufacturer-id: GenuineIntel
+
+runtime: openvino-model-server
+
+model:
+  default: qwen3-coder-30b-a3b-q4-k-m-gguf
+  options:
+    - qwen3-coder-30b-a3b-q4-k-m-gguf

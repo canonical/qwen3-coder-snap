@@ -1,0 +1,24 @@
+#!/bin/bash -eu
+
+port="$(modelctl get http.port)"
+host="$(modelctl get http.host)"
+
+extra_args=()
+
+verbose="$(modelctl get verbose)"
+if [ "${verbose}" = "true" ]; then
+  extra_args+=(--log_level DEBUG)
+fi
+
+set -x
+ovms \
+    --rest_port "$port" \
+    --rest_bind_address "$host" \
+    --model_repository_path "$MODEL_REPO" \
+    --source_model "$MODEL_DIR" \
+    --gguf_filename "$MODEL_FILE_NAME" \
+    --model_name "$MODEL_NAME" \
+    --task text_generation \
+    --target_device CPU \
+    "${extra_args[@]}" \
+    "$@"
