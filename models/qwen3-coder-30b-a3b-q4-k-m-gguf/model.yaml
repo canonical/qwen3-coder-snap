@@ -28,8 +28,11 @@ environment:
   # The layout below flattens them into a single directory via symlinks.
   # The model file path is set to the first shard's symlink:
   - MODEL_NAME=qwen3-coder-30b-a3b-q4-k-m
-  - SHARDS_DIR=/tmp/model-qwen3-coder-30b-a3b-q4-k-m-gguf-shards
-  - MODEL_FILE=$SHARDS_DIR/Qwen3-Coder-30B-A3B-Instruct-Q4_K_M-00001-of-00004.gguf
+  - MODEL_REPO=/tmp
+  - MODEL_DIR=model-qwen3-coder-30b-a3b-q4-k-m-gguf-shards
+  - SHARDS_DIR=$MODEL_REPO/$MODEL_DIR
+  - MODEL_FILE_NAME=Qwen3-Coder-30B-A3B-Instruct-Q4_K_M-00001-of-00004.gguf
+  - MODEL_FILE=$SHARDS_DIR/$MODEL_FILE_NAME
 
 layout:
   $SHARDS_DIR/Qwen3-Coder-30B-A3B-Instruct-Q4_K_M-00001-of-00004.gguf:
