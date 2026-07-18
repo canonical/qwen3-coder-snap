@@ -14,9 +14,9 @@ devices:
 runtime: llamacpp-cuda
 
 model:
-  default: qwen3-coder-30b-a3b-q4-k-m-gguf
+  default: qwen3-coder-30b-a3b
   options:
-    - qwen3-coder-30b-a3b-q4-k-m-gguf
+    - qwen3-coder-30b-a3b
 
 configurations:
   sleep-idle-seconds: 600
