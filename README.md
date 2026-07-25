@@ -17,13 +17,18 @@ This snap installs a hardware-optimized engine for inference with
 Clone this repo with its submodules:
 ```shell
 git clone --recurse-submodules https://github.com/canonical/qwen3-coder-snap
+cd qwen3-coder-snap
 ```
 
-Prepare the required models by running `download-models.sh`.
-
-Build the snap and its component:
+Initialize the development environment:
 ```shell
-snapcraft pack -v
+make init
+```
+
+Build and install snap:
+```shell
+make build
+make install
 ```
 
 Refer to the `./dev` directory for additional development tools.
