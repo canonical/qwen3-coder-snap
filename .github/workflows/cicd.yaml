@@ -28,6 +28,7 @@ jobs:
       store-track: latest
       snap-name: qwen3-coder
       smoke-test-engine: cpu
+      smoke-test-features: openai_models, openai_chat_text
       smoke-test-runner: |
         [
           ["amd64", "xlarge", "self-hosted"],
