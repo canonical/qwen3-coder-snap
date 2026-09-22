@@ -4,6 +4,27 @@
 This snap installs a hardware-optimized engine for inference with
 [Qwen3 Coder](https://www.qwen3coder.com/), Alibaba's code generation AI model, flexibly switching from deep reasoning to fast response.
 
+The snap includes the following hardware-optimized inference engines:
+
+* cpu: Optimized for x64 and ARM (armv8, armv9) CPUs
+* amd-gpu: ROCm-enabled GPU acceleration
+* nvidia-gpu: CUDA-enabled GPU acceleration
+
+The most suitable engine is automatically selected based on the available hardware.
+
+#### Install
+```shell
+sudo snap install qwen3-coder
+```
+
+#### Run
+```shell
+qwen3-coder
+```
+
+> [!TIP]
+> Some accelerators require extra [drivers](https://documentation.ubuntu.com/inference-snaps/how-to/setup/drivers/) to be usable with this snap.
+
 ## Resources
 
 📚 **[Documentation](https://documentation.ubuntu.com/inference-snaps/)**, learn how to use inference snaps
