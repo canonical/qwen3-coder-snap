@@ -12,6 +12,7 @@ description: |
   * cpu: Optimized for x64 and ARM (armv8, armv9) CPUs
   * amd-gpu: ROCm-enabled GPU acceleration
   * nvidia-gpu: CUDA-enabled GPU acceleration
+  * vulkan: Vulkan GPU acceleration for AMD and Intel GPUs
 
   The most suitable engine is automatically selected based on the available hardware.
 
@@ -199,6 +200,30 @@ parts:
       "licenses": usr/share/doc/llama.cpp+cuda # Add licenses to the snap
       "*": (component/llamacpp-cuda)
   
+  llamacpp-vulkan:
+    plugin: dump
+    source:
+      - on amd64: https://github.com/ggml-org/llama.cpp/releases/download/b9611/llama-b9611-bin-ubuntu-vulkan-x64.tar.gz
+      - on arm64: https://github.com/ggml-org/llama.cpp/releases/download/b9611/llama-b9611-bin-ubuntu-vulkan-arm64.tar.gz
+    stage-packages:
+      - libgomp1
+      - libvulkan1
+      - mesa-vulkan-drivers
+    organize:
+      "licenses": usr/share/doc/llama.cpp+vulkan # Add licenses to the snap
+      "*": (component/llamacpp-vulkan)
+    override-build: |
+      craftctl default
+
+      # The upstream release tarball has a flat layout (binaries and shared
+      # libraries side by side). Keep them together in bin/, as the $ORIGIN
+      # RUNPATH of the prebuilt binaries and the ggml dynamic backend loader
+      # expect.
+      cd "$CRAFT_PART_INSTALL"
+      mkdir -p bin licenses
+      mv --target-directory=bin llama* rpc-server lib*
+      mv --target-directory=licenses LICENSE
+
   llamacpp-rocm-amd64:
     plugin: dump
     source: https://github.com/canonical/llama.cpp-builds/releases/download/b9611/llamacpp-amd64+rocm.tar.gz
@@ -254,6 +279,11 @@ components:
   llamacpp-rocm:
     type: standard
     summary: llama.cpp with ROCm backend
+    description: LLM inference in C/C++
+
+  llamacpp-vulkan:
+    type: standard
+    summary: llama.cpp with Vulkan backend
     description: LLM inference in C/C++
 
 apps:
