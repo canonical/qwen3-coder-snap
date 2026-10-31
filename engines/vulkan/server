@@ -1,0 +1,39 @@
+#!/bin/bash -eu
+
+port="$(modelctl get http.port)"
+host="$(modelctl get http.host)"
+sleep_idle_seconds="$(modelctl get sleep-idle-seconds)"
+min_context_size="$(modelctl get min-context-size)"
+model_name=$("$SNAP_NAME" model --format=json | jq -r '.name')
+
+# Point the Vulkan loader at the ICDs shipped in the llamacpp-vulkan component.
+# The loader also probes the default ICD locations, so these are additive.
+if [ -n "${VULKAN_ICD_PATH:-}" ]; then
+  icd_files=""
+  for icd_file in "$VULKAN_ICD_PATH"/*.json; do
+    [ -e "$icd_file" ] || continue
+    icd_files="$icd_files:$icd_file"
+  done
+  if [ -n "$icd_files" ]; then
+    export VK_DRIVER_FILES="${icd_files:1}" # Modern loader variable
+    export VK_ICD_FILENAMES="$VK_DRIVER_FILES" # Deprecated, kept for compatibility
+  fi
+fi
+
+mmproj_args=()
+if [ -n "${MMPROJ_FILE:-}" ]; then
+  mmproj_args=(--mmproj "$MMPROJ_FILE")
+fi
+
+set -x
+# Adding --no-warmup to skip the model warmup phase during server startup in order to reduce resource usage if not needed.
+exec llama-server \
+  --model "$MODEL_FILE" \
+  --alias "$model_name" \
+  "${mmproj_args[@]}" \
+  --port "$port" \
+  --host "$host" \
+  --no-warmup \
+  --sleep-idle-seconds "$sleep_idle_seconds" \
+  --fit-ctx "$min_context_size" \
+  "$@"
